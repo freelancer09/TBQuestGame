@@ -1,0 +1,368 @@
+﻿<Window x:Class="TBQuestGame.PresentationLayer.GameSessionView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TBQuestGame.PresentationLayer"
+        mc:Ignorable="d"
+        Title="TB Quest Game" 
+        Height="600" 
+        Width="800"
+        Background="LightYellow"
+        WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibility"/>
+        <Style x:Key="BorderStyle" TargetType="Border">
+            <Setter Property="BorderBrush" Value="LightBlue"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Padding" Value="10,0,10,0"/>
+        </Style>
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="Width" Value="80"/>
+            <Setter Property="Background" Value="LightBlue"/>
+            <Setter Property="Foreground" Value="Red"/>
+        </Style>
+        <Style x:Key="LabelStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Foreground" Value="Red"/>
+        </Style>
+        <Style x:Key="TextBoxStyle" TargetType="TextBox">
+            <Setter Property="Width" Value="50"/>
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="IsReadOnly" Value="True"/>
+            <Setter Property="Padding" Value="3,0,3,0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Border
+                            Background="{TemplateBinding Background}"
+                            x:Name="Bd"
+                            BorderBrush="Black"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="5">
+                            <ScrollViewer x:Name="PART_ContentHost"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Border
+                Grid.Row="0"
+                Grid.Column="0"
+                Style="{StaticResource BorderStyle}">
+                <StackPanel
+                    Orientation="Vertical">
+                    <Label
+                        Style="{StaticResource LabelStyle}"
+                        HorizontalAlignment="Center"
+                        Content="Current Location"/>
+                    <TextBox
+                        Style="{StaticResource TextBoxStyle}"
+                        Width="Auto"
+                        Margin="5"
+                        HorizontalContentAlignment="Center"
+                        Text="{Binding CurrentLocation.Name, Mode=OneWay}"/>
+                    <TextBox
+                        Style="{StaticResource TextBoxStyle}"
+                        Width="Auto"
+                        Height="80"
+                        Margin="5"
+                        TextWrapping="Wrap"
+                        VerticalScrollBarVisibility="Auto"
+                        Text="{Binding CurrentLocation.Description, Mode=OneWay}"/>
+                </StackPanel>
+            </Border>
+            <Border
+                Grid.Row="0"
+                Grid.Column="1"
+                Style="{StaticResource BorderStyle}">
+                <StackPanel
+                    Orientation="Vertical">
+                    <Label 
+                        Style="{StaticResource LabelStyle}"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Content="Current Objective"/>
+                    <TextBox
+                        Style="{StaticResource TextBoxStyle}"
+                        Height="Auto"
+                        Width="Auto"
+                        Margin="5"
+                        TextWrapping="Wrap"
+                        HorizontalContentAlignment="Center"
+                        Text="This is your current objective!"/>
+                    <Label
+                        Style="{StaticResource LabelStyle}"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Content="Game Log"/>
+                    <TextBox
+                        Style="{StaticResource TextBoxStyle}"
+                        Height="200"
+                        Width="Auto"
+                        Margin="5"
+                        TextWrapping="Wrap"
+                        Text="{Binding MessageDisplay, Mode=OneWay}"
+                        VerticalScrollBarVisibility="Auto"
+                        VerticalContentAlignment="Top"/>
+                </StackPanel>
+            </Border>
+            <Grid
+                Grid.Row="0"
+                Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="7*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Border
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Style="{StaticResource BorderStyle}">
+                    <Label 
+                        Style="{StaticResource LabelStyle}"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Content="Player Inventory"/>
+                </Border>
+                <Border
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Style="{StaticResource BorderStyle}">
+                    <Button
+                        Name="QuitButton"
+                        Style="{StaticResource ButtonStyle}" 
+                        Content="Quit" Click="QuitButton_Click"/>
+                </Border>
+            </Grid>
+        </Grid>
+        <Border
+            Grid.Row="1"
+            Grid.Column="0"
+            Style="{StaticResource BorderStyle}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Label
+                    Grid.RowSpan="2"
+                    VerticalContentAlignment="Center"
+                    Style="{StaticResource LabelStyle}"
+                    Content="Move"/>
+                <Button 
+                    Grid.Column="1"
+                    Name="NorthButton"
+                    Style="{StaticResource ButtonStyle}"
+                    Content="North"
+                    Click="NorthButton_Click"/>
+                <TextBox
+                    Grid.Column="1"
+                    Grid.Row="1"
+                    Width="Auto"
+                    Margin="1,0,1,0"
+                    HorizontalContentAlignment="Center"
+                    Style="{StaticResource TextBoxStyle}"
+                    Text="{Binding NorthLocation.Name, Mode=OneWay}"
+                    Visibility="{Binding HasNorthLocation, Converter={StaticResource BooleanToVisibility}}"
+                    />
+                <Button 
+                    Grid.Column="2"
+                    Name="EastButton"
+                    Style="{StaticResource ButtonStyle}"
+                    Content="East"
+                    Click="EastButton_Click"/>
+                <TextBox
+                    Grid.Column="2"
+                    Grid.Row="1"
+                    Width="Auto"
+                    Margin="1,0,1,0"
+                    HorizontalContentAlignment="Center"
+                    Style="{StaticResource TextBoxStyle}"
+                    Text="{Binding EastLocation.Name, Mode=OneWay}"
+                    Visibility="{Binding HasEastLocation, Converter={StaticResource BooleanToVisibility}}"
+                    />
+                <Button 
+                    Grid.Column="3"
+                    Name="SouthButton"
+                    Style="{StaticResource ButtonStyle}"
+                    Content="South"
+                    Click="SouthButton_Click"/>
+                <TextBox
+                    Grid.Column="3"
+                    Grid.Row="3"
+                    Width="Auto"
+                    Margin="1,0,1,0"
+                    HorizontalContentAlignment="Center"
+                    Style="{StaticResource TextBoxStyle}"
+                    Text="{Binding SouthLocation.Name, Mode=OneWay}"
+                    Visibility="{Binding HasSouthLocation, Converter={StaticResource BooleanToVisibility}}"
+                    />
+                <Button 
+                    Grid.Column="4"
+                    Name="WestButton"
+                    Style="{StaticResource ButtonStyle}"
+                    Content="West"
+                    Click="WestButton_Click"/>
+                <TextBox
+                    Grid.Column="4"
+                    Grid.Row="4"
+                    Width="Auto"
+                    Margin="1,0,1,0"
+                    HorizontalContentAlignment="Center"
+                    Style="{StaticResource TextBoxStyle}"
+                    Text="{Binding WestLocation.Name, Mode=OneWay}"
+                    Visibility="{Binding HasWestLocation, Converter={StaticResource BooleanToVisibility}}"
+                    />
+            </Grid>
+        </Border>
+        <Border
+            Grid.Row="2"
+            Grid.Column="0"
+            Style="{StaticResource BorderStyle}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Style="{StaticResource LabelStyle}"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Content="Player Stats"/>
+                <Label
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Style="{StaticResource LabelStyle}"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Content="{Binding Player.Name}"/>
+                <StackPanel 
+                    Grid.Row="0"
+                    Grid.Column="1"          
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right">
+                    <Label 
+                        Style="{StaticResource LabelStyle}"
+                        Content="Math: "/>
+                    <TextBox 
+                        Style="{StaticResource TextBoxStyle}"
+                        Text="{Binding Player.SkillMath}"/>
+                </StackPanel>
+                <StackPanel 
+                    Grid.Row="1"
+                    Grid.Column="1"          
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right">
+                    <Label 
+                        Style="{StaticResource LabelStyle}"
+                        Content="Science: "/>
+                    <TextBox 
+                        Style="{StaticResource TextBoxStyle}"
+                        Text="{Binding Player.SkillScience}"/>
+                </StackPanel>
+                <StackPanel 
+                    Grid.Row="0"
+                    Grid.Column="2"          
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right">
+                    <Label 
+                        Style="{StaticResource LabelStyle}"
+                        Content="English: "/>
+                    <TextBox 
+                        Style="{StaticResource TextBoxStyle}"
+                        Text="{Binding Player.SkillEnglish}"/>
+                </StackPanel>
+                <StackPanel 
+                    Grid.Row="1"
+                    Grid.Column="2"          
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right">
+                    <Label 
+                        Style="{StaticResource LabelStyle}"
+                        Content="History: "/>
+                    <TextBox 
+                        Style="{StaticResource TextBoxStyle}"
+                        Text="{Binding Player.SkillHistory}"/>
+                </StackPanel>
+                <StackPanel 
+                    Grid.Row="0"
+                    Grid.Column="3"          
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right">
+                    <Label 
+                        Style="{StaticResource LabelStyle}"
+                        Content="Physical: "/>
+                    <TextBox 
+                        Style="{StaticResource TextBoxStyle}"
+                        Text="{Binding Player.SkillPhysical}"/>
+                </StackPanel>
+                <StackPanel 
+                    Grid.Row="0"
+                    Grid.Column="4"          
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right">
+                    <Label 
+                        Style="{StaticResource LabelStyle}"
+                        Content="Stamina: "/>
+                    <TextBox 
+                        Style="{StaticResource TextBoxStyle}"
+                        Text="{Binding Player.Stamina}"/>
+                </StackPanel>
+                <StackPanel 
+                    Grid.Row="1"
+                    Grid.Column="4"          
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right">
+                    <Label 
+                        Style="{StaticResource LabelStyle}"
+                        Content="Money: "/>
+                    <TextBox 
+                        Style="{StaticResource TextBoxStyle}"
+                        Text="{Binding Player.Money, StringFormat={}{0:C}}"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>
