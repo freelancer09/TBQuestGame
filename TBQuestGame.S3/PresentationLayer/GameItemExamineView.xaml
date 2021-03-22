@@ -1,0 +1,35 @@
+﻿<Window x:Class="TBQuestGame.PresentationLayer.GameItemExamineView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TBQuestGame.PresentationLayer"
+        mc:Ignorable="d"
+        Title="Item Information" 
+        Height="200" 
+        Width="300"
+        Background="LightYellow"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <StackPanel
+            Orientation="Vertical">
+            <Label
+                Name="NameLabel"
+                Foreground="Red"
+                HorizontalAlignment="Center"
+                Content="GameItem Name"/>
+            <TextBlock
+                Name="InformationTextBlock"
+                HorizontalAlignment="Center"
+                Height="100"
+                Width="200"
+                Text="Game Item Description here."/>
+            <Button
+                Width="70"
+                Height="20"
+                Foreground="Red"
+                Background="LightBlue"
+                Content="Ok" Click="Button_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
